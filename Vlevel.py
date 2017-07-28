@@ -367,3 +367,92 @@ class Level_06(Level):
         block.player = self.player
         block.level = self
         self.platform_list.add(block)
+
+
+class Level_07(Level):
+
+    def __init__(self, player, coin, score):
+
+
+        # call parent constructor
+        Level.__init__(self, player, coin, score)
+
+        self.level_limit = -1500
+
+        # array of platform (w,h), (x,y)
+        level = [[95,95, 655, 280],
+                [95,95, 950, 245],
+                [95,95, 1200, 215],
+                [115, 45, 810, 425],
+                [85, 85, 1450, 185],
+                [75, 65, 1785, 170],
+                ]
+
+
+        for platform in level:
+            block = Platform(platform[0], platform[1])
+            block.rect.x = platform[2]
+            block.rect.y = platform[3]
+            block.player = self.player
+            self.platform_list.add(block)
+
+        for coin in level:
+            item = Coin()
+            item.rect.x = coin[2]+40
+            item.rect.y = coin[3]-75
+            item.player = self.player
+            self.enemy_list.add(item)
+
+        # Add a custom moving platform
+        block = MovingPlatform(50, 250) # Add Width & Height
+        block.rect.x = 1360 # X-axis
+        block.rect.y =  5 #Y-Axis
+        block.boundary_top = 5 # Choose Boundries
+        block.boundary_bottom = 500 # Choose End Boundry
+        block.change_y = 8
+        block.player = self.player
+        block.level = self
+        self.platform_list.add(block)
+
+        block = MovingPlatform(50, 250) # Add Width & Height
+        block.rect.x = 1620 # X-axis
+        block.rect.y =  115 #Y-Axis
+        block.boundary_top = 5 # Choose Boundries
+        block.boundary_bottom = 500 # Choose End Boundry
+        block.change_y = 8
+        block.player = self.player
+        block.level = self
+        self.platform_list.add(block)
+
+        block = MovingPlatform(50, 250) # Add Width & Height
+        block.rect.x = 1100 # X-axis
+        block.rect.y =  200 #Y-Axis
+        block.boundary_top = 5 # Choose Boundries
+        block.boundary_bottom = 500 # Choose End Boundry
+        block.change_y = 8
+        block.player = self.player
+        block.level = self
+        self.platform_list.add(block)
+
+
+        # -- First Block
+        block = MovingPlatform(175, 75) # Add Width & Height
+        block.rect.x = 400 # X-axis
+        block.rect.y =  285 #Y-Axis
+        block.boundary_top = 285 # Choose Boundries
+        block.boundary_bottom = 545 # Choose End Boundry
+        block.change_y = 3
+        block.player = self.player
+        block.level = self
+        self.platform_list.add(block)
+
+
+        # -- Add LadyMonarch
+        lady = MovingExtra('ladyM.png', 100, 172)
+        lady.rect.x = 900
+        lady.rect.y = SCREEN_HEIGHT - 170
+        lady.boundary_left = 680
+        lady.boundary_right = 1200
+        lady.change_x = 6
+        lady.level = self
+        self.extra_list.add(lady)

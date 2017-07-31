@@ -112,17 +112,17 @@ class Level_01(Level):
             item.player = self.player
             self.enemy_list.add(item)
 
-        # -- Needs Work
-        #if player.rect.x == 1200:
-        #h21 = Extras('h21.png', 48, 76)
-        #h21.rect.x = 1255
-        #h21.rect.y = 400
-        #width_change = 6
-        #height_change = 6
-        #width_max = 100
-        #height_max = 178
-        #h21.level = self
-        #self.extra_list.add(h21)
+        # -- Moving Extras
+        flyH = Extras('henchfly.png', 300, 200)
+        flyH.rect.x = 2300
+        flyH.rect.y = 5
+        flyH.change_x = 5
+        flyH.level = self
+        self.extra_list.add(flyH)
+        if flyH.rect.x < -25:
+            flyH.rect.x = 1500
+
+
 
 class Level_02(Level):
 
@@ -161,7 +161,7 @@ class Level_02(Level):
 
         # -- Extras 7/27
 
-        orph = MovingExtra('docOrph.png', 95, 150)
+        orph = MovingExtra('docOrphR.png', 95, 150)
         orph.rect.x = 1550
         orph.rect.y = SCREEN_HEIGHT - 150
         orph.boundary_left = 1550
@@ -367,3 +367,95 @@ class Level_06(Level):
         block.player = self.player
         block.level = self
         self.platform_list.add(block)
+
+
+class Level_07(Level):
+
+    def __init__(self, player, coin, score):
+
+
+        # call parent constructor
+        Level.__init__(self, player, coin, score)
+
+        self.level_limit = -1500
+
+        # array of platform (w,h), (x,y)
+        level = [[95,95, 655, 280],
+                [95,95, 950, 245],
+                [95,95, 1200, 215],
+                [115, 45, 810, 425],
+                [85, 85, 1450, 185],
+                [75, 65, 1785, 170],
+                ]
+
+
+        for platform in level:
+            block = Platform(platform[0], platform[1])
+            block.rect.x = platform[2]
+            block.rect.y = platform[3]
+            block.player = self.player
+            self.platform_list.add(block)
+
+        for coin in level:
+            item = Coin()
+            item.rect.x = coin[2]+40
+            item.rect.y = coin[3]-75
+            item.player = self.player
+            self.enemy_list.add(item)
+
+        # Add a custom moving platform
+        block = MovingPlatform(50, 250) # Add Width & Height
+        block.rect.x = 1360 # X-axis
+        block.rect.y =  5 #Y-Axis
+        block.boundary_top = 5 # Choose Boundries
+        block.boundary_bottom = 500 # Choose End Boundry
+        block.change_y = 8
+        block.player = self.player
+        block.level = self
+        self.platform_list.add(block)
+
+        block = MovingPlatform(50, 250) # Add Width & Height
+        block.rect.x = 1620 # X-axis
+        block.rect.y =  115 #Y-Axis
+        block.boundary_top = 5 # Choose Boundries
+        block.boundary_bottom = 500 # Choose End Boundry
+        block.change_y = 8
+        block.player = self.player
+        block.level = self
+        self.platform_list.add(block)
+
+        block = MovingPlatform(50, 250) # Add Width & Height
+        block.rect.x = 1100 # X-axis
+        block.rect.y =  200 #Y-Axis
+        block.boundary_top = 5 # Choose Boundries
+        block.boundary_bottom = 500 # Choose End Boundry
+        block.change_y = 8
+        block.player = self.player
+        block.level = self
+        self.platform_list.add(block)
+
+
+        # -- First Block
+        block = MovingPlatform(175, 75) # Add Width & Height
+        block.rect.x = 400 # X-axis
+        block.rect.y =  285 #Y-Axis
+        block.boundary_top = 285 # Choose Boundries
+        block.boundary_bottom = 545 # Choose End Boundry
+        block.change_y = 3
+        block.player = self.player
+        block.level = self
+        self.platform_list.add(block)
+
+
+        # -- Add LadyMonarch -
+        lady = MovingExtra('ladyMR.png', 100, 172)
+        lady.rect.x = 1750
+        lady.rect.y = SCREEN_HEIGHT - 172
+        lady.boundary_left = 1000
+        lady.boundary_right = 1750
+        lady.change_x = 6
+        lady.level = self
+        self.extra_list.add(lady)
+
+
+## -- Level to act as portal to Win Screen 

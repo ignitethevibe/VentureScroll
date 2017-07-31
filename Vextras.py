@@ -15,6 +15,9 @@ class Extras(pygame.sprite.Sprite):
 
         self.rect = self.image.get_rect()
 
+        #self.image_flip = [pygame.transform.flip(image, True, False)]
+
+
 
 class MovingExtra(Extras):
 
@@ -31,6 +34,7 @@ class MovingExtra(Extras):
 
         width_max = 0
         height_max = 0
+
 
         player = None
 
@@ -56,9 +60,11 @@ class MovingExtra(Extras):
             cur_pos = self.rect.x - self.level.world_shift
             if cur_pos < self.boundary_left or cur_pos > self.boundary_right:
                 self.change_x *= -1
+                self.image = pygame.transform.flip(self.image, True, False)
 
 
-                # --- Needs Work 
+
+                # --- Needs Work
             # -- Size control-- Growing until Max Height
             #if self.width > self.width_max:
                 #self.width_change = 0

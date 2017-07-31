@@ -100,12 +100,13 @@ def runGame():
 
     # create levels include Coin variable
     level_list = []
-    level_list.append(Level_01(player, coin, score))
-    level_list.append(Level_02(player, coin, score))
+    #level_list.append(Level_01(player, coin, score))
+    #level_list.append(Level_02(player, coin, score))
     #level_list.append(Level_03(player, coin, score))
-    level_list.append(Level_04(player, coin, score))
-    level_list.append(Level_05(player, coin, score))
-    level_list.append(Level_06(player, coin, score))
+    #level_list.append(Level_04(player, coin, score))
+    #level_list.append(Level_05(player, coin, score))
+    #level_list.append(Level_06(player, coin, score))
+    level_list.append(Level_07(player, coin, score))
 
     # set the current level
     current_level_no = 0
@@ -124,7 +125,7 @@ def runGame():
      #-- Timer Display Setup
     frame_count = 0
 
-    start_time = 10
+    start_time = 110
 
 
     # loop until the user clicks the close button

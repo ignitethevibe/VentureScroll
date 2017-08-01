@@ -94,6 +94,7 @@ class Level_01(Level):
                 [210, 40, 1325, 200],
                 [100, 60, 1635, 150],
                 [210, 50, 1850, 100],
+                [195, 250, 1650, 350],
                 ]
 
         # go through array and add platforms
@@ -112,17 +113,19 @@ class Level_01(Level):
             item.player = self.player
             self.enemy_list.add(item)
 
-        # -- Needs Work
-        #if player.rect.x == 1200:
-        #h21 = Extras('h21.png', 48, 76)
-        #h21.rect.x = 1255
-        #h21.rect.y = 400
-        #width_change = 6
-        #height_change = 6
-        #width_max = 100
-        #height_max = 178
-        #h21.level = self
-        #self.extra_list.add(h21)
+        # -- Moving Extras
+        mcouple = MovingExtra('mcouple.png', 120, 200)
+        mcouple.rect.x = 1900
+        mcouple.rect.y = 430
+        mcouple.boundary_top = 410
+        mcouple.boundary_bottom = 805
+        mcouple.boundary_left = 0
+        mcouple.boundary_right = 2000
+        mcouple.change_y = 3
+        mcouple.level = self
+        self.extra_list.add(mcouple)
+
+
 
 class Level_02(Level):
 
@@ -132,7 +135,7 @@ class Level_02(Level):
         # call parent constructor
         Level.__init__(self, player, coin, score)
 
-        self.level_limit = -1500
+        self.level_limit = -1300
 
         # array of platform (w,h), (x,y)
         level = [[210, 30, 450 ,570],
@@ -161,7 +164,7 @@ class Level_02(Level):
 
         # -- Extras 7/27
 
-        orph = MovingExtra('docOrph.png', 95, 150)
+        orph = MovingExtra('docOrphR.png', 95, 150)
         orph.rect.x = 1550
         orph.rect.y = SCREEN_HEIGHT - 150
         orph.boundary_left = 1550
@@ -186,6 +189,7 @@ class Level_03(Level):
                 [195, 50, 820, 420],
                 [200, 30, 1220, 410],
                 [150, 40, 1100, 270],
+                [200, 110, 1525, 445],
                 [210, 30, 1700, 220],
                 ]
 
@@ -367,3 +371,123 @@ class Level_06(Level):
         block.player = self.player
         block.level = self
         self.platform_list.add(block)
+
+
+class Level_07(Level):
+
+    def __init__(self, player, coin, score):
+
+
+        # call parent constructor
+        Level.__init__(self, player, coin, score)
+
+        self.level_limit = -1500
+
+        # array of platform (w,h), (x,y)
+        level = [[95,95, 655, 280],
+                [95,95, 950, 245],
+                [95,95, 1200, 215],
+                [115, 45, 810, 425],
+                [85, 85, 1450, 185],
+                [75, 65, 1785, 170],
+                ]
+
+
+        for platform in level:
+            block = Platform(platform[0], platform[1])
+            block.rect.x = platform[2]
+            block.rect.y = platform[3]
+            block.player = self.player
+            self.platform_list.add(block)
+
+        for coin in level:
+            item = Coin()
+            item.rect.x = coin[2]+40
+            item.rect.y = coin[3]-75
+            item.player = self.player
+            self.enemy_list.add(item)
+
+        # Add a custom moving platform
+        block = MovingPlatform(50, 250) # Add Width & Height
+        block.rect.x = 1360 # X-axis
+        block.rect.y =  5 #Y-Axis
+        block.boundary_top = 5 # Choose Boundries
+        block.boundary_bottom = 500 # Choose End Boundry
+        block.change_y = 8
+        block.player = self.player
+        block.level = self
+        self.platform_list.add(block)
+
+        block = MovingPlatform(50, 250) # Add Width & Height
+        block.rect.x = 1620 # X-axis
+        block.rect.y =  115 #Y-Axis
+        block.boundary_top = 5 # Choose Boundries
+        block.boundary_bottom = 500 # Choose End Boundry
+        block.change_y = 8
+        block.player = self.player
+        block.level = self
+        self.platform_list.add(block)
+
+        block = MovingPlatform(50, 250) # Add Width & Height
+        block.rect.x = 1100 # X-axis
+        block.rect.y =  200 #Y-Axis
+        block.boundary_top = 5 # Choose Boundries
+        block.boundary_bottom = 500 # Choose End Boundry
+        block.change_y = 8
+        block.player = self.player
+        block.level = self
+        self.platform_list.add(block)
+
+
+        # -- First Block
+        block = MovingPlatform(175, 75) # Add Width & Height
+        block.rect.x = 400 # X-axis
+        block.rect.y =  285 #Y-Axis
+        block.boundary_top = 285 # Choose Boundries
+        block.boundary_bottom = 565 # Choose End Boundry
+        block.change_y = 3
+        block.player = self.player
+        block.level = self
+        self.platform_list.add(block)
+
+
+        # -- Add LadyMonarch -
+        lady = MovingExtra('ladyMR.png', 100, 172)
+        lady.rect.x = 1750
+        lady.rect.y = SCREEN_HEIGHT - 172
+        lady.boundary_left = 1000
+        lady.boundary_right = 1750
+        lady.change_x = 6
+        lady.level = self
+        self.extra_list.add(lady)
+
+
+## -- Level to act as portal to Win Screen
+class Level_08(Level):
+
+    def __init__(self, player, coin, score):
+
+
+        # call parent constructor
+        Level.__init__(self, player, coin, score)
+
+        self.level_limit = -1000
+
+        # array of platform (w,h), (x,y)
+        level = [[0, 0, 0, 0],
+                ]
+
+
+        for platform in level:
+            block = Platform(platform[0], platform[1])
+            block.rect.x = platform[2]
+            block.rect.y = platform[3]
+            block.player = self.player
+            self.platform_list.add(block)
+
+        for coin in level:
+            item = Coin()
+            item.rect.x = coin[2]+40
+            item.rect.y = coin[3]-75
+            item.player = self.player
+            self.enemy_list.add(item)

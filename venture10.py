@@ -9,6 +9,7 @@ from Vlevel import *
 from Vcoin import *
 from vscore import *
 from game_over import *
+from win_screen import *
 from Vextras import *
 #import level_01, level_02, level_03, level_04, level_05, level_06
 
@@ -102,10 +103,12 @@ def runGame():
     level_list = []
     level_list.append(Level_01(player, coin, score))
     level_list.append(Level_02(player, coin, score))
-    #level_list.append(Level_03(player, coin, score))
+    level_list.append(Level_03(player, coin, score))
     level_list.append(Level_04(player, coin, score))
     level_list.append(Level_05(player, coin, score))
     level_list.append(Level_06(player, coin, score))
+    level_list.append(Level_07(player, coin, score))
+    level_list.append(Level_08(player, coin, score))
 
     # set the current level
     current_level_no = 0
@@ -114,17 +117,10 @@ def runGame():
 
 
 
-    #active_sprite_list.add(coin)
-
-    #Moved to Constants
-    #score = 0
-    #score = Level(coin, score)
-
-
      #-- Timer Display Setup
     frame_count = 0
 
-    start_time = 10
+    start_time = 120
 
 
     # loop until the user clicks the close button
@@ -150,7 +146,7 @@ def runGame():
 
 
 
-        #scoretext = font.render('Score = '+str(score),1,(purple))
+
 
             # update the player
         active_sprite_list.update()
@@ -182,18 +178,15 @@ def runGame():
                 current_level = level_list[current_level_no]
                 player.level = current_level
 
-
-
+        # -- Win Screen once player reaches end
+        if current_level_no > len(level_list)-2:
+            done = True
+            winScreen()
 
             # ALL CODE TO DRAW SHOULD GO BELOW THIS COMMENT
         current_level.draw(screen)
         active_sprite_list.draw(screen)
 
-        # -------
-        #coin_list.draw(screen)
-
-        # --- blit score
-        #score.draw(screen)
 
 
         # --- Timer going up ---
@@ -229,6 +222,7 @@ def runGame():
         if total_seconds == 0:
             done = True
             gameOver()
+
 
     # to avoid exit errors
     pygame.quit()

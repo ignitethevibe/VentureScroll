@@ -13,7 +13,9 @@ pygame.display.set_caption('WINNER!')
 clock = pygame.time.Clock()
 
 vbros = pygame.image.load('vbros.png')
+cap = pygame.image.load('capsunR2.png')
 frame_rate = 60
+
 
 def winScreen():
     pygame.init()
@@ -30,13 +32,26 @@ def winScreen():
     h21 = pygame.image.load('h21.png')
     h21 = pygame.transform.scale(h21, [95, 135])
 
+    # -- Captain Sunshine
+    cap_x = -230
+    cap_y = 5
+
+    capx_change = 6
+    #capy_change =
+
+
     degrees1 = 0
     degrees2 = 0
 
     while True:
 
-        screen.blit(pygame.transform.scale(vbros, (SCREEN_WIDTH, SCREEN_HEIGHT)), (0,0))
+        cap_x += capx_change
+        if cap_x > 1015:
+            cap_x = -210
 
+
+        screen.blit(pygame.transform.scale(vbros, (SCREEN_WIDTH, SCREEN_HEIGHT)), (0,0))
+        screen.blit(cap, (cap_x, cap_y))
         # -- Adding Rotating Text
         rotatedSurf = pygame.transform.rotate(titleSurf, degrees1)
         rotatedRect = rotatedSurf.get_rect()
@@ -53,7 +68,7 @@ def winScreen():
         #-- Add image
         rotate21 = pygame.transform.rotate(h21, degrees2)
         Rect21 = rotate21.get_rect()
-        Rect21.topleft = (300, 120)
+        Rect21.topleft = (580, 390)
         screen.blit(rotate21, Rect21)
 
         #if checkForKeyPress():
